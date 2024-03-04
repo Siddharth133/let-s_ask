@@ -6,6 +6,7 @@ from models import Question
 from datetime import datetime
 from sqlalchemy.sql.expression import func
 from flask_sqlalchemy import SQLAlchemy
+from flask import make_response
 
 # Initialize the db variable without an app
 db = SQLAlchemy()
@@ -64,8 +65,10 @@ def create_app():
         else:
             return abort(404)
         db.session.commit()
+        resp = make_response(redirect(url_for('home')))
+        resp.set_cookie(cookie_key, 'true', max_age=30*24*60*60)  # Example: Expires in 30 days
         flash('Your vote has been recorded.', 'success')
-        return redirect(url_for('home'))
+        return resp
     return app
    
 
