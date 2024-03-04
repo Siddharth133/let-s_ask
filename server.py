@@ -36,7 +36,7 @@ def create_app():
         page = request.args.get('page', 1, type=int)
         trending = Question.query.order_by((Question.count1 + Question.count2).desc()).limit(5).all()
         questions = Question.query.order_by(func.random()).paginate(per_page=10, page=page)
-        return render_template("index.html", questions=questions, trending=trending)
+        return render_template("index.html", question=questions, trending=trending)
 
     @app.route("/add_ques", methods=['GET', 'POST'])
     def add_ques():
