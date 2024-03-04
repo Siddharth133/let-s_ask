@@ -51,6 +51,11 @@ def create_app():
 
     @app.route("/vote/<int:question_id>/<option>")
     def vote(question_id, option):
+        cookie_key = f"voted_{question_id}"
+        if request.cookies.get(cookie_key):
+            flash('You have already voted on this question.', 'warning')
+            return redirect(url_for('home'))
+
         question = Question.query.get_or_404(question_id)
         if option == 'option1':
             question.count1 += 1
