@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Ask</title>
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Questions to Answer</h1>
+            <!-- Add Question Button -->
+            <a href="{{ url_for('add_ques') }}" class="btn btn-success">Add Question</a>
+        </div>
+
+        {% for ques in question.items %}
+        <div class="card mb-3" style="width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title">{{ques.question}}</h5>
+                <a href="{{ url_for('vote', question_id=ques.id, option='option1') }}" class="btn btn-primary">{{ques.option1}}</a>
+                <a href="{{ url_for('vote', question_id=ques.id, option='option2') }}" class="btn btn-secondary">{{ques.option2}}</a>
+            </div>
+        </div>
+        {% endfor %}
+        
+        <h1 class="mt-5">Trending Questions</h1>
+        {% for ques in trending %}
+        <div class="card mb-3" style="width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title">{{ques.question}}</h5>
+                <p>Option 1: {{ (ques.count1 / (ques.count1 + ques.count2) * 100) | round(2) if (ques.count1 + ques.count2) > 0 else 0 }}%</p>
+<p>Option 2: {{ (ques.count2 / (ques.count1 + ques.count2) * 100) | round(2) if (ques.count1 + ques.count2) > 0 else 0 }}%</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

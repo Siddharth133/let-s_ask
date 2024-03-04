@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Question</title>
+    <!-- Bootstrap CDN for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Add New Question</h2>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">New Question Details</legend>
+            <div class="form-group">
+                {{ form.question.label(class="form-control-label") }}
+                {% if form.question.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.question.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.question(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.option1.label(class="form-control-label") }}
+                {% if form.option1.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.option1.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.option1(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.option2.label(class="form-control-label") }}
+                {% if form.option2.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.option2.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.option2(class="form-control") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div>
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+</body>
+</html>
