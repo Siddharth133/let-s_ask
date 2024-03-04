@@ -15,8 +15,7 @@ def create_app():
     load_dotenv()
 
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-    
-    
+    db.init_app(app)
     # Include your models here (Question)
     class Question(db.Model):
         id = db.Column(db.Integer, primary_key=True)
