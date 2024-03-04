@@ -13,7 +13,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     load_dotenv()
-
+    app.config['SECRET_KEY'] = '32811a5e6f0d2b4e26069182db09d329'
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
     db.init_app(app)
     # Include your models here (Question)
